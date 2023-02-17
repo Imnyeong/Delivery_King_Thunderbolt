@@ -6,13 +6,15 @@ public class ObjectSpawn : MonoBehaviour
 {
     public static ObjectSpawn Instance;
     // Singleton
-    [SerializeField] Canvas canvas;
-
+    [Header("Object Pool")]
     public GameObject carPrefab;
     public GameObject oilPrefab;
 
     private List<GameObject> carPool = new List<GameObject>();
     private int poolSize = 11;
+
+    private string poolName = "ObjectPool";
+    private Transform poolTransform;
 
     private IEnumerator spawnCoroutine;
 
@@ -24,17 +26,19 @@ public class ObjectSpawn : MonoBehaviour
 
     void Start()
     {
+        poolTransform = GameObject.Find(poolName).transform;
+
         if (Instance == null)
             Instance = this;
         // Singleton
         for (int i = 0; i < poolSize; ++i)
         {
-            GameObject go = Instantiate(carPrefab, canvas.transform);
+            GameObject go = Instantiate(carPrefab, poolTransform);
             go.SetActive(false);
             carPool.Add(go);
         }
         // OjbectPooling
-        GameObject oilGo = Instantiate(oilPrefab, canvas.transform);
+        GameObject oilGo = Instantiate(oilPrefab, poolTransform);
         oilGo.SetActive(false);
 
         if (spawnCoroutine != null)
