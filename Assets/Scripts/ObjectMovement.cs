@@ -2,32 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectMovement : MonoBehaviour
+public class ObjectMovement : BaseMovement
 {
-    [Header("Value")]
-    [SerializeField] Vector2 startPosition;
-    [SerializeField] Vector2 endPosition;
+    private float[] xPositionArray = new float[4] { -280.0f, -90.0f, 90.0f, 280.0f };
 
-    public RectTransform objectRect;
+    private int minValue = 0;
+    private int maxValue = 4;
 
-    void Update() => MoveDown();
-     
-    public void MoveDown()
+    static int seed;
+    System.Random random = new System.Random(seed++);
+
+    public void SetPosition()
     {
-        if (objectRect.anchoredPosition.y <= endPosition.y)
-            objectRect.anchoredPosition = startPosition;  
-            // 끝 지점에 도착하면 시작 위치로 초기화
-        else
-            objectRect.anchoredPosition = new Vector2(objectRect.anchoredPosition.x, objectRect.anchoredPosition.y - GameManager.Instance.speedValue);
-            // 끝 지점에 도착할 때 까지 아래로 이동
+        this.gameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(xPositionArray[random.Next(minValue, maxValue)], GetStartPosition().y);
+        // 난수를 받아서 해당 Index의 X값으로 위치 이동
+        this.gameObject.SetActive(true);
     }
-
-    public Vector2 GetStartPosition()
+    // Update is called once per frame
+    void Update()
     {
-        return startPosition;
-    }
-    public Vector2 GetEndPosition()
-    {
-        return endPosition;
+        MoveDown();
+        if (objectRect.anchoredPosition.y <= GetEndPosition().y)
+            ObjectSpawn.Instance.ObjectReturn(this.gameObject);
+        // 끝 지점에 도착하면 ObjectPool에 반환
     }
 }

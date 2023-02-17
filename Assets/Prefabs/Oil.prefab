@@ -87,6 +87,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22a19d18706459f4bb2d221457f130d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPosition: {x: 0, y: 0}
-  endPosition: {x: 0, y: 0}
+  startPosition: {x: 0, y: 1200}
+  endPosition: {x: 0, y: -1200}
   objectRect: {fileID: 2625026436444230487}

@@ -10,8 +10,9 @@ public class ObjectSpawn : MonoBehaviour
     public GameObject carPrefab;
     public GameObject oilPrefab;
 
-    private List<GameObject> carPool = new List<GameObject>();
+    private List<GameObject> objectPool = new List<GameObject>();
     private int poolSize = 11;
+    private int oilIndex = 10;
 
     private string poolName = "ObjectPool";
     private Transform poolTransform;
@@ -20,6 +21,9 @@ public class ObjectSpawn : MonoBehaviour
 
     static int seed;
     System.Random random = new System.Random(seed++);
+
+    private int minValue = 1;
+    private int maxValue = 10;
 
     private int minTime = 1;
     private int maxTime = 3;
@@ -33,13 +37,16 @@ public class ObjectSpawn : MonoBehaviour
         // Singleton
         for (int i = 0; i < poolSize; ++i)
         {
-            GameObject go = Instantiate(carPrefab, poolTransform);
+            GameObject go;
+            if (i != oilIndex)
+                go = Instantiate(carPrefab, poolTransform);            
+            else
+                go = Instantiate(oilPrefab, poolTransform);
+
             go.SetActive(false);
-            carPool.Add(go);
+            objectPool.Add(go);
         }
-        // OjbectPooling
-        GameObject oilGo = Instantiate(oilPrefab, poolTransform);
-        oilGo.SetActive(false);
+        // OjbectPooling Setting
 
         if (spawnCoroutine != null)
             spawnCoroutine = null;
@@ -49,16 +56,20 @@ public class ObjectSpawn : MonoBehaviour
     }
     public GameObject CarSpawn()
     {
-        for (int i = 0; i < carPool.Count; ++i)
+        for (int i = 0; i < oilIndex; ++i)
         {
-            if (!carPool[i].activeInHierarchy)
-                return carPool[i];
+            if (!objectPool[i].activeInHierarchy)
+                return objectPool[i];
         }
         // ObjectPooling Spawn
         return null;
     }
-
-    public void CarRemove(GameObject _go)
+    public GameObject OilSpawn()
+    {
+        return objectPool[oilIndex];
+        // Oil Spawn
+    }
+    public void ObjectReturn(GameObject _go)
     {
         _go.SetActive(false);
         // ObjectPooling return
@@ -68,7 +79,13 @@ public class ObjectSpawn : MonoBehaviour
     {
         while(true)
         {
-            CarSpawn().GetComponent<CarMovement>().SetPosition();
+            int randomSpawn = random.Next(minValue, maxValue);
+            if(randomSpawn == minValue && !objectPool[oilIndex].activeInHierarchy)
+                OilSpawn().GetComponent<ObjectMovement>().SetPosition();
+            else
+                CarSpawn().GetComponent<ObjectMovement>().SetPosition();
+            // 확률적으로 차 대신 기름을 Spawn
+
             int randomTime = random.Next(minTime, maxTime);
             yield return new WaitForSecondsRealtime(randomTime);
             // 랜덤한 시간 간격으로 Car Spawn
