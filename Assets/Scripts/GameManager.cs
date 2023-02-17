@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
+    // Singleton
     [Header("Value")]
     public float speedValue;
     public float accelValue;
@@ -13,6 +15,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        if (Instance == null)
+            Instance = this;
+        // Singleton
         if (accelCoroutine != null)
             accelCoroutine = null;
         // Coroutine 초기화

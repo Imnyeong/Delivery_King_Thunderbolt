@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2625026436444230486}
   - component: {fileID: -8037802192858904054}
   m_Layer: 5
-  m_Name: Car
+  m_Name: Oil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ RectTransform:
   m_GameObject: {fileID: 2625026436444230488}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: -1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -36,7 +36,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 128, y: 180}
+  m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2625026436444230485
 CanvasRenderer:
@@ -65,8 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 3079434808264247364, guid: 2529f58c0f0f4784d925363eac539680,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: dd5da6e4107699449a6d31d01a481290, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -88,6 +87,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22a19d18706459f4bb2d221457f130d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPosition: {x: 0, y: 1200}
-  endPosition: {x: 0, y: -1200}
+  startPosition: {x: 0, y: 0}
+  endPosition: {x: 0, y: 0}
   objectRect: {fileID: 2625026436444230487}
