@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2625026436444230485}
   - component: {fileID: 2625026436444230486}
   - component: {fileID: -8037802192858904054}
+  - component: {fileID: 4776257838809909475}
   m_Layer: 5
   m_Name: Oil
   m_TagString: Untagged
@@ -90,3 +91,22 @@ MonoBehaviour:
   startPosition: {x: 0, y: 1200}
   endPosition: {x: 0, y: -1200}
   objectRect: {fileID: 2625026436444230487}
+--- !u!95 &4776257838809909475
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2625026436444230488}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 949cdf00df2d9c444a9bb4d870b6850c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
