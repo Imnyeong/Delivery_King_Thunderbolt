@@ -1,10 +1,9 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class PlayManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static PlayManager Instance;
     // Singleton
     [Header("Value")]
     public float speedValue;
