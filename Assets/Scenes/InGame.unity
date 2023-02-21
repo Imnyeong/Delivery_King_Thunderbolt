@@ -569,6 +569,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ddedace634b65949bb1c6c50a477ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &1885619614 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8840541420435458833, guid: a0894673c0131eb4a9bd8f202159c9b3,
+    type: 3}
+  m_PrefabInstance: {fileID: 701044488}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2020286851
 GameObject:
   m_ObjectHideFlags: 0
@@ -928,6 +934,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6243993641680628375, guid: 149904cfd25ace246a8795cb98d842d0,
+        type: 3}
+      propertyPath: oilImage
+      value: 
+      objectReference: {fileID: 1885619614}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 149904cfd25ace246a8795cb98d842d0, type: 3}
 --- !u!1001 &7525168748613658508

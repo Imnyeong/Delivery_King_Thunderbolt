@@ -19,7 +19,7 @@ public class ObjectMovement : BaseMovement
     // Update is called once per frame
     void Update()
     {
-        if (!PlayManager.Instance.onPlay)
+        if (PlayManager.Instance.playType != PlayManager.PlayType.Play)
             return;
         // 플레이 중이 아니면 return
 

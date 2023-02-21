@@ -14,16 +14,19 @@ public class PlayManager : MonoBehaviour
     public float maxSpeed = 10.0f;
     private IEnumerator accelCoroutine;
 
-    public bool onPlay = true;
+    public PlayType playType = PlayType.Play;
+    public enum PlayType
+    {
+        Play,
+        Pause,
+        End
+    }
 
     [SerializeField] Button pauseButton;
     [SerializeField] Sprite[] pauseImages;
     
     private void Start()
     {
-        pauseButton.onClick.RemoveAllListeners();
-        pauseButton.onClick.AddListener(OnClickPause);
-
         if (Instance == null)
             Instance = this;
         // Singleton
@@ -32,25 +35,33 @@ public class PlayManager : MonoBehaviour
         // Coroutine 초기화
         accelCoroutine = AccelCoroutine();
         StartCoroutine(accelCoroutine);
+
+        pauseButton.onClick.RemoveAllListeners();
+        pauseButton.onClick.AddListener(OnClickPause);
     }
     IEnumerator AccelCoroutine()
     {
         while (speedValue < maxSpeed)
         {
+            yield return new WaitForSecondsRealtime(1.0f);
+
+            if (playType == PlayType.Play)
             {
                 speedValue += accelValue;
                 // Realtime으로 1초마다 accelValue를 speedValue에 더해준다
             }
-            yield return new WaitForSecondsRealtime(1.0f);
         }
-        if (speedValue >= maxSpeed)
+        if (speedValue >= maxSpeed || playType == PlayType.End)
             StopCoroutine(accelCoroutine);
             // 최대 속도에 도달하면 Coroutine 종료
     }
 
     public void OnClickPause()
     {
-        onPlay = !onPlay;
-        pauseButton.image.sprite = pauseImages[Convert.ToInt32(onPlay)];
+        if (playType == PlayType.Play)
+            playType = PlayType.Pause;
+        else if (playType == PlayType.Pause)
+            playType = PlayType.Play;
+        pauseButton.image.sprite = pauseImages[Convert.ToInt32(playType == PlayType.Play)];
     }
 }

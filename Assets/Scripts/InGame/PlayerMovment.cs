@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovment : MonoBehaviour
 {
@@ -10,9 +12,23 @@ public class PlayerMovment : MonoBehaviour
     private int moveLeft = -1;
     private int moveRight = 1;
 
+    private float currentOil = 100.0f;
+    private float oilRatio = 6.9f;
+    [SerializeField] RectTransform oilImage;
+
+    private IEnumerator oilCoroutine;
+
+    void Start()
+    {
+        if (oilCoroutine != null)
+            oilCoroutine = null;
+        // Coroutine 초기화
+        oilCoroutine = OilCoroutine();
+        StartCoroutine(oilCoroutine);
+    }
     void Update()
     {
-        if (!PlayManager.Instance.onPlay)
+        if (PlayManager.Instance.playType != PlayManager.PlayType.Play)
             return;
         // 플레이 중이 아니면 return
         Move();
@@ -39,5 +55,29 @@ public class PlayerMovment : MonoBehaviour
             playerRect.anchoredPosition += new Vector2(speedValue, 0.0f);
             // Right 애니메이션 실행, 위치 X값 speedValue 만큼 오른쪽으로 이동
         }
-    }    
+    }
+    IEnumerator OilCoroutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSecondsRealtime(1.0f);
+
+            if (currentOil <= 0)
+            {
+                StopCoroutine(oilCoroutine);
+                PlayManager.Instance.playType = PlayManager.PlayType.End;
+            }
+            // 기름이 0이 되면 Coroutine 종료 PlayType을 End로 설정
+
+            if (PlayManager.Instance.playType == PlayManager.PlayType.Play)
+            {
+                if(currentOil > 0)
+                {
+                    --currentOil;
+                    oilImage.sizeDelta = new Vector2( currentOil * oilRatio, oilImage.sizeDelta.y);
+                }
+            }
+            // 1.0초 마다 기름이 단다
+        }
+    }
 }

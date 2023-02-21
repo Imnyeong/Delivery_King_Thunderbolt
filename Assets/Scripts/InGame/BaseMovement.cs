@@ -10,17 +10,13 @@ public class BaseMovement : MonoBehaviour
 
     void Update()
     {
-        if (!PlayManager.Instance.onPlay)
+        if (PlayManager.Instance.playType != PlayManager.PlayType.Play)
             return;
         // 플레이 중이 아니면 return
         MoveDown();
     }
     public void MoveDown()
     {
-        if (!PlayManager.Instance.onPlay)
-            return;
-        // 플레이 중이 아니면 return
-
         if (objectRect.anchoredPosition.y <= endPosition.y)
             objectRect.anchoredPosition = startPosition;  
             // 끝 지점에 도착하면 시작 위치로 초기화
