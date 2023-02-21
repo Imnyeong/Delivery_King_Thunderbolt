@@ -55,7 +55,9 @@ public class PlayerMovment : MonoBehaviour
         if (other.tag == "Car")
         // 차에 부딪힌 경우
         {
-            currentOil = 0.0f;
+            currentOil = carValue;
+            StopCoroutine(oilCoroutine);
+            PlayManager.Instance.playType = PlayManager.PlayType.End;
         }
         oilImage.sizeDelta = new Vector2(currentOil * oilRatio, oilImage.sizeDelta.y);
         // 체력바 동기화
