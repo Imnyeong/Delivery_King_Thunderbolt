@@ -38,6 +38,7 @@ public class PlayManager : MonoBehaviour
 
         pauseButton.onClick.RemoveAllListeners();
         pauseButton.onClick.AddListener(OnClickPause);
+        // 정지 버튼 리스터 초기화
     }
     IEnumerator AccelCoroutine()
     {
@@ -62,6 +63,8 @@ public class PlayManager : MonoBehaviour
             playType = PlayType.Pause;
         else if (playType == PlayType.Pause)
             playType = PlayType.Play;
+        // 정지 상태 변경
         pauseButton.image.sprite = pauseImages[Convert.ToInt32(playType == PlayType.Play)];
+        // 정지 버튼 아이콘 변경
     }
 }
