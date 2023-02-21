@@ -19,7 +19,11 @@ public class ObjectMovement : BaseMovement
     // Update is called once per frame
     void Update()
     {
-        MoveDown();
+        if (!PlayManager.Instance.onPlay)
+            return;
+        // 플레이 중이 아니면 return
+
+        base.MoveDown();
         if (objectRect.anchoredPosition.y <= GetEndPosition().y)
             ObjectSpawn.Instance.ObjectReturn(this.gameObject);
         // 끝 지점에 도착하면 ObjectPool에 반환

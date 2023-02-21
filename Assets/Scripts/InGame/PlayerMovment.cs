@@ -10,7 +10,13 @@ public class PlayerMovment : MonoBehaviour
     private int moveLeft = -1;
     private int moveRight = 1;
 
-    void Update() => Move();
+    void Update()
+    {
+        if (!PlayManager.Instance.onPlay)
+            return;
+        // 플레이 중이 아니면 return
+        Move();
+    }
     // Update 문에서 입력 체크
     void Move()
     {

@@ -79,13 +79,15 @@ public class ObjectSpawn : MonoBehaviour
     {
         while(true)
         {
-            int randomSpawn = random.Next(minValue, maxValue);
-            if(randomSpawn == minValue && !objectPool[oilIndex].activeInHierarchy)
-                OilSpawn().GetComponent<ObjectMovement>().SetPosition();
-            else
-                CarSpawn().GetComponent<ObjectMovement>().SetPosition();
-            // 확률적으로 차 대신 기름을 Spawn
-
+            if(PlayManager.Instance.onPlay)
+            {
+                int randomSpawn = random.Next(minValue, maxValue);
+                if (randomSpawn == minValue && !objectPool[oilIndex].activeInHierarchy)
+                    OilSpawn().GetComponent<ObjectMovement>().SetPosition();
+                else
+                    CarSpawn().GetComponent<ObjectMovement>().SetPosition();
+                // 확률적으로 차 대신 기름을 Spawn
+            }
             int randomTime = random.Next(minTime, maxTime);
             yield return new WaitForSecondsRealtime(randomTime);
             // 랜덤한 시간 간격으로 Car Spawn
