@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayManager : MonoBehaviour
@@ -15,6 +16,7 @@ public class PlayManager : MonoBehaviour
     private IEnumerator accelCoroutine;
 
     public PlayType playType = PlayType.Play;
+
     public enum PlayType
     {
         Play,
@@ -24,7 +26,13 @@ public class PlayManager : MonoBehaviour
 
     [SerializeField] Button pauseButton;
     [SerializeField] Sprite[] pauseImages;
-    
+
+    [SerializeField] GameObject gameoverUI;
+    string intro = "Intro";
+    string scoreString = " 점 달성!";
+    [SerializeField] Text scoreText;
+    [SerializeField] InputField nameInput;
+
     private void Start()
     {
         if (Instance == null)
@@ -54,7 +62,7 @@ public class PlayManager : MonoBehaviour
         }
         if (speedValue >= maxSpeed || playType == PlayType.End)
             StopCoroutine(accelCoroutine);
-            // 최대 속도에 도달하면 Coroutine 종료
+        // 최대 속도에 도달하면 Coroutine 종료
     }
 
     public void OnClickPause()
@@ -66,5 +74,25 @@ public class PlayManager : MonoBehaviour
         // 정지 상태 변경
         pauseButton.image.sprite = pauseImages[Convert.ToInt32(playType == PlayType.Play)];
         // 정지 버튼 아이콘 변경
+    }
+    public void GameOver()
+    {
+        gameoverUI.SetActive(true);
+        scoreText.text = string.Format("{0:#,###}", ScoreManager.Instance.scoreValue + scoreString);
+        // GameOver UI 띄워주고 점수 보여준다
+    }
+    public void GameRePlay()
+    {
+        ScoreManager.Instance.saveScore(nameInput.text);
+        // 이름 입력 받아서 점수 저장
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        // InGame Scene 재시작
+    }
+    public void GoIntro()
+    {
+        ScoreManager.Instance.saveScore(nameInput.text);
+        // 이름 입력 받아서 점수 저장
+        SceneManager.LoadScene(intro);
+        // Intro Scene으로 이동
     }
 }

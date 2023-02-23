@@ -15,7 +15,7 @@ public class SettingManager : MonoBehaviour
         {
             buttonImages[i].sprite = sprites[PlayerPrefs.GetInt(settingString + i.ToString())];
         }
-        // 단말기에 저장된 설정대로 스프라이드 설정
+        // 단말기에 저장된 설정대로 스프라이트 설정
     }
 
     public void OnClickButton(int _index)

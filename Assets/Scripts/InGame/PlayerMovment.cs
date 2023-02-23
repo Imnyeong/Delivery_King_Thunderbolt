@@ -58,6 +58,7 @@ public class PlayerMovment : MonoBehaviour
             currentOil = carValue;
             StopCoroutine(oilCoroutine);
             PlayManager.Instance.playType = PlayManager.PlayType.End;
+            PlayManager.Instance.GameOver();
         }
         oilImage.sizeDelta = new Vector2(currentOil * oilRatio, oilImage.sizeDelta.y);
         // 체력바 동기화
@@ -94,6 +95,7 @@ public class PlayerMovment : MonoBehaviour
             {
                 StopCoroutine(oilCoroutine);
                 PlayManager.Instance.playType = PlayManager.PlayType.End;
+                PlayManager.Instance.GameOver();
             }
             // 기름이 0이 되면 Coroutine 종료 PlayType을 End로 설정
 
