@@ -32,6 +32,7 @@ public class PlayManager : MonoBehaviour
     string scoreString = " 점 달성!";
     [SerializeField] Text scoreText;
     [SerializeField] InputField nameInput;
+    [SerializeField] Text warningText;
 
     private void Start()
     {
@@ -83,6 +84,12 @@ public class PlayManager : MonoBehaviour
     }
     public void GameRePlay()
     {
+        if (nameInput.text.Contains(" "))
+        {
+            warningText.gameObject.SetActive(true);
+            return;
+        }
+
         ScoreManager.Instance.saveScore(nameInput.text);
         // 이름 입력 받아서 점수 저장
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -90,6 +97,12 @@ public class PlayManager : MonoBehaviour
     }
     public void GoIntro()
     {
+        if (nameInput.text.Contains(" "))
+        {
+            warningText.gameObject.SetActive(true);
+            return;
+        }
+
         ScoreManager.Instance.saveScore(nameInput.text);
         // 이름 입력 받아서 점수 저장
         SceneManager.LoadScene(intro);

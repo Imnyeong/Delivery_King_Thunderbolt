@@ -15,6 +15,7 @@ public class ScoreManager : MonoBehaviour
     [HideInInspector] public int scoreValue = 0;
     int rankCount = 10;
 
+
     void Start()
     {
         if (Instance == null)

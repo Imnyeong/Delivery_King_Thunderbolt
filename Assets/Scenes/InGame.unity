@@ -438,6 +438,11 @@ PrefabInstance:
       propertyPath: pauseButton
       value: 
       objectReference: {fileID: 701044490}
+    - target: {fileID: 3233285141896321497, guid: 2c59f53dd861b3c419f3338ee250449f,
+        type: 3}
+      propertyPath: warningText
+      value: 
+      objectReference: {fileID: 6355619074516901878}
     - target: {fileID: 3233285141896321498, guid: 2c59f53dd861b3c419f3338ee250449f,
         type: 3}
       propertyPath: m_RootOrder
@@ -1194,6 +1199,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d199490a83bb2b844b9695cbf13b01ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6355619074516901878 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5313117545730177281, guid: f0c3d6a205dfb2044b8551ca223433d8,
+    type: 3}
+  m_PrefabInstance: {fileID: 6355619074516901874}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &7525168748613658508
