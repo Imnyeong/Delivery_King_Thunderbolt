@@ -7,7 +7,8 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager Instance;
 
     string scoreString = "Score : ";
-    string rankString = "rank";
+    string rankString = "rankString";
+    string rankInt = "rankInt";
     private IEnumerator scoreCoroutine;
 
     [SerializeField] Text scoreText;
@@ -46,17 +47,18 @@ public class ScoreManager : MonoBehaviour
 
     public void saveScore(string _name)
     {
+        string convertUserName = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(_name));
         for (int i = 0; i < rankCount; i++)
         {
-            if (scoreValue > PlayerPrefs.GetInt(rankString + i.ToString()))
+            if (scoreValue > PlayerPrefs.GetInt(rankInt + i.ToString()))
             {
                 for (int j = 9; j > i; j--)
                 {
-                    PlayerPrefs.SetString(rankString + j.ToString(), PlayerPrefs.GetString(rankString + (j - 1).ToString()));
-                    PlayerPrefs.SetInt(rankString + j.ToString(), PlayerPrefs.GetInt(rankString + (j - 1).ToString()));
+                    PlayerPrefs.SetString(rankString + j.ToString(), System.Text.Encoding.UTF8.GetString(System.Convert.FromBase64String(PlayerPrefs.GetString(rankString + (j - 1).ToString()))));
+                    PlayerPrefs.SetInt(rankInt + j.ToString(), PlayerPrefs.GetInt(rankInt + (j - 1).ToString()));
                 }
-                PlayerPrefs.SetString(rankString + i.ToString(), _name);
-                PlayerPrefs.SetInt(rankString + i.ToString(), scoreValue);
+                PlayerPrefs.SetString(rankString + i.ToString(), convertUserName);
+                PlayerPrefs.SetInt(rankInt + i.ToString(), scoreValue);
                 break;
             }
         }
