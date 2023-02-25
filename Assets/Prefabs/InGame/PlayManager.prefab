@@ -43,11 +43,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7152f73ed0abbc146bdb74364a556d8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedValue: 5
+  speedValue: 8
   accelValue: 0.015
-  maxSpeed: 8
-  onPlay: 1
+  maxSpeed: 12
+  playType: 0
   pauseButton: {fileID: 0}
   pauseImages:
   - {fileID: 21300000, guid: d65eb167adc745942a49b38d2f44f347, type: 3}
   - {fileID: 21300000, guid: 89388db0f0c66994e9aee628ef78abd0, type: 3}
+  gameoverUI: {fileID: 0}
+  scoreText: {fileID: 0}
+  nameInput: {fileID: 0}
+  warningText: {fileID: 0}
