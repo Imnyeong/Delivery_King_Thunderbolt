@@ -72,17 +72,11 @@ public class PlayerMovment : MonoBehaviour
         Physics2D.gravity = new Vector2(accelerometer, 1);
 
         if (accelerometer > moveRight)
-        {
             playerRect.anchoredPosition += new Vector2(speedValue, 0.0f);
-            animator.SetInteger(animationType, moveRight);
-        }
         else if (accelerometer < moveLeft)
-        {
             playerRect.anchoredPosition -= new Vector2(speedValue, 0.0f);
-            animator.SetInteger(animationType, moveLeft);
-        }
-        else
-            animator.SetInteger(animationType, moveIdle);
+
+        Animation(accelerometer);
 
         //if ((Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.RightArrow)) 
         //    || (!Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow)))
@@ -103,6 +97,15 @@ public class PlayerMovment : MonoBehaviour
         //    playerRect.anchoredPosition += new Vector2(speedValue, 0.0f);
         //    // Right 애니메이션 실행, 위치 X값 speedValue 만큼 오른쪽으로 이동
         //}
+    }
+    void Animation(float _value)
+    {
+        if (_value > moveRight * 2)
+            animator.SetInteger(animationType, moveRight);
+        else if (_value < moveLeft * 2)
+            animator.SetInteger(animationType, moveLeft);
+        else
+            animator.SetInteger(animationType, moveIdle);
     }
     IEnumerator OilCoroutine()
     {
