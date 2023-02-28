@@ -43,9 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7152f73ed0abbc146bdb74364a556d8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedValue: 8
-  accelValue: 0.015
-  maxSpeed: 12
+  speedValue: 10
+  accelValue: 0.05
+  maxSpeed: 20
   playType: 0
   pauseButton: {fileID: 0}
   pauseImages:

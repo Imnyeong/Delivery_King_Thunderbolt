@@ -30,6 +30,7 @@ public class PlayManager : MonoBehaviour
     [SerializeField] GameObject gameoverUI;
     string intro = "Intro";
     string scoreString = " 점 달성!";
+    string emptyString = "-";
     [SerializeField] Text scoreText;
     [SerializeField] InputField nameInput;
     [SerializeField] Text warningText;
@@ -39,6 +40,8 @@ public class PlayManager : MonoBehaviour
         if (Instance == null)
             Instance = this;
         // Singleton
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
+        // 플레이 중에는 화면이 안꺼지도록
         if (accelCoroutine != null)
             accelCoroutine = null;
         // Coroutine 초기화
@@ -89,8 +92,10 @@ public class PlayManager : MonoBehaviour
             warningText.gameObject.SetActive(true);
             return;
         }
-
-        ScoreManager.Instance.saveScore(nameInput.text);
+        else if(nameInput.text.Equals(string.Empty))
+            ScoreManager.Instance.saveScore(emptyString);
+        else
+            ScoreManager.Instance.saveScore(nameInput.text);
         // 이름 입력 받아서 점수 저장
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         // InGame Scene 재시작
@@ -102,8 +107,10 @@ public class PlayManager : MonoBehaviour
             warningText.gameObject.SetActive(true);
             return;
         }
-
-        ScoreManager.Instance.saveScore(nameInput.text);
+        else if (nameInput.text.Equals(string.Empty))
+            ScoreManager.Instance.saveScore(emptyString);
+        else
+            ScoreManager.Instance.saveScore(nameInput.text);
         // 이름 입력 받아서 점수 저장
         SceneManager.LoadScene(intro);
         // Intro Scene으로 이동

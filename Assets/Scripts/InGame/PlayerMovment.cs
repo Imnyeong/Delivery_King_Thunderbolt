@@ -38,9 +38,9 @@ public class PlayerMovment : MonoBehaviour
         if (PlayManager.Instance.playType != PlayManager.PlayType.Play)
             return;
         // 플레이 중이 아니면 return
-        Move();
     }
-    // Update 문에서 입력 체크
+    void FixedUpdate() => Move();
+    // FixedUpdate 문에서 입력 체크
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -71,34 +71,38 @@ public class PlayerMovment : MonoBehaviour
         accelerometer = Input.acceleration.x * accelValue;
         Physics2D.gravity = new Vector2(accelerometer, 1);
 
-        if (accelerometer > 3)
+        if (accelerometer > moveRight)
+        {
+            playerRect.anchoredPosition += new Vector2(speedValue, 0.0f);
             animator.SetInteger(animationType, moveRight);
-        else if (accelerometer < -3)
+        }
+        else if (accelerometer < moveLeft)
+        {
+            playerRect.anchoredPosition -= new Vector2(speedValue, 0.0f);
             animator.SetInteger(animationType, moveLeft);
+        }
         else
             animator.SetInteger(animationType, moveIdle);
 
-        playerRect.anchoredPosition += new Vector2(speedValue, 0.0f);
-
-        //if ((Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.RightArrow)) 
-        //    || (!Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow)))
-        //    // 왼쪽, 오른쪽 키가 동시에 눌렸거나 둘 다 눌리지 않은 경우
-        //    animator.SetInteger("MoveType", moveIdle);
-        //    // 움직임 없이 Idle 애니메이션 실행
-        //else if (Input.GetKey(KeyCode.LeftArrow))
-        //// 왼쪽 키가 눌린 경우
-        //{
-        //    animator.SetInteger("MoveType", moveLeft);
-        //    playerRect.anchoredPosition -= new Vector2(speedValue, 0.0f);
-        //    // Left 애니메이션 실행, 위치 X값 speedValue 만큼 왼쪽으로 이동
-        //}
-        //else if (Input.GetKey(KeyCode.RightArrow))
-        //// 왼쪽 키가 눌린 경우
-        //{
-        //    animator.SetInteger("MoveType", moveRight);
-        //    playerRect.anchoredPosition += new Vector2(speedValue, 0.0f);
-        //    // Right 애니메이션 실행, 위치 X값 speedValue 만큼 오른쪽으로 이동
-        //}
+        if ((Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.RightArrow)) 
+            || (!Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow)))
+            // 왼쪽, 오른쪽 키가 동시에 눌렸거나 둘 다 눌리지 않은 경우
+            animator.SetInteger("MoveType", moveIdle);
+            // 움직임 없이 Idle 애니메이션 실행
+        else if (Input.GetKey(KeyCode.LeftArrow))
+        // 왼쪽 키가 눌린 경우
+        {
+            animator.SetInteger("MoveType", moveLeft);
+            playerRect.anchoredPosition -= new Vector2(speedValue, 0.0f);
+            // Left 애니메이션 실행, 위치 X값 speedValue 만큼 왼쪽으로 이동
+        }
+        else if (Input.GetKey(KeyCode.RightArrow))
+        // 왼쪽 키가 눌린 경우
+        {
+            animator.SetInteger("MoveType", moveRight);
+            playerRect.anchoredPosition += new Vector2(speedValue, 0.0f);
+            // Right 애니메이션 실행, 위치 X값 speedValue 만큼 오른쪽으로 이동
+        }
     }
     IEnumerator OilCoroutine()
     {
