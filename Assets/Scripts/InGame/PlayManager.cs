@@ -30,7 +30,6 @@ public class PlayManager : MonoBehaviour
     [SerializeField] GameObject gameoverUI;
     string intro = "Intro";
     string scoreString = " 점 달성!";
-    string emptyString = "-";
     [SerializeField] Text scoreText;
     [SerializeField] InputField nameInput;
     [SerializeField] Text warningText;
@@ -51,6 +50,7 @@ public class PlayManager : MonoBehaviour
         pauseButton.onClick.RemoveAllListeners();
         pauseButton.onClick.AddListener(OnClickPause);
         // 정지 버튼 리스터 초기화
+        GameManager.Instance.BGMPlay();
     }
     IEnumerator AccelCoroutine()
     {
@@ -71,13 +71,21 @@ public class PlayManager : MonoBehaviour
 
     public void OnClickPause()
     {
+        //PlayerPrefs.DeleteAll();
         if (playType == PlayType.Play)
+        {
             playType = PlayType.Pause;
+            GameManager.Instance.BGMPause();
+        }
         else if (playType == PlayType.Pause)
+        {
             playType = PlayType.Play;
+            GameManager.Instance.BGMResume();
+        }
         // 정지 상태 변경
         pauseButton.image.sprite = pauseImages[Convert.ToInt32(playType == PlayType.Play)];
         // 정지 버튼 아이콘 변경
+        
     }
     public void GameOver()
     {
@@ -92,8 +100,6 @@ public class PlayManager : MonoBehaviour
             warningText.gameObject.SetActive(true);
             return;
         }
-        else if(nameInput.text.Equals(string.Empty))
-            ScoreManager.Instance.saveScore(emptyString);
         else
             ScoreManager.Instance.saveScore(nameInput.text);
         // 이름 입력 받아서 점수 저장
@@ -107,8 +113,6 @@ public class PlayManager : MonoBehaviour
             warningText.gameObject.SetActive(true);
             return;
         }
-        else if (nameInput.text.Equals(string.Empty))
-            ScoreManager.Instance.saveScore(emptyString);
         else
             ScoreManager.Instance.saveScore(nameInput.text);
         // 이름 입력 받아서 점수 저장

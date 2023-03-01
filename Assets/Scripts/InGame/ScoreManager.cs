@@ -9,6 +9,8 @@ public class ScoreManager : MonoBehaviour
     string scoreString = "Score : ";
     string rankString = "rankString";
     string rankInt = "rankInt";
+    string emptyString = "-";
+
     private IEnumerator scoreCoroutine;
 
     [SerializeField] Text scoreText;
@@ -48,17 +50,19 @@ public class ScoreManager : MonoBehaviour
 
     public void saveScore(string _name)
     {
-        string convertUserName = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(_name));
+        if (_name.Equals(string.Empty))
+            _name = emptyString;
+
         for (int i = 0; i < rankCount; i++)
         {
             if (scoreValue > PlayerPrefs.GetInt(rankInt + i.ToString()))
             {
                 for (int j = 9; j > i; j--)
                 {
-                    PlayerPrefs.SetString(rankString + j.ToString(), System.Text.Encoding.UTF8.GetString(System.Convert.FromBase64String(PlayerPrefs.GetString(rankString + (j - 1).ToString()))));
+                    PlayerPrefs.SetString(rankString + j.ToString(), PlayerPrefs.GetString(rankString + (j - 1).ToString()));
                     PlayerPrefs.SetInt(rankInt + j.ToString(), PlayerPrefs.GetInt(rankInt + (j - 1).ToString()));
                 }
-                PlayerPrefs.SetString(rankString + i.ToString(), convertUserName);
+                PlayerPrefs.SetString(rankString + i.ToString(), _name);
                 PlayerPrefs.SetInt(rankInt + i.ToString(), scoreValue);
                 break;
             }

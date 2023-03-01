@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
@@ -23,4 +21,5 @@ public class CameraManager : MonoBehaviour
         camera.rect = rect;
         // 카메라 비율 강제 고정 9 : 16
     }
+    void OnPreCull() => GL.Clear(true, true, Color.black);
 }

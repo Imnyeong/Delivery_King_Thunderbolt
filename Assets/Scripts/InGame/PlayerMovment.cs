@@ -33,15 +33,14 @@ public class PlayerMovment : MonoBehaviour
         oilCoroutine = OilCoroutine();
         StartCoroutine(oilCoroutine);
     }
-    void Update()
+    void FixedUpdate()
     {
         if (PlayManager.Instance.playType != PlayManager.PlayType.Play)
             return;
         // 플레이 중이 아니면 return
+        Move();
     }
-    void FixedUpdate() => Move();
     // FixedUpdate 문에서 입력 체크
-
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Oil")

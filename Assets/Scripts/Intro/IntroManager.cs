@@ -5,6 +5,7 @@ public class IntroManager : MonoBehaviour
 {
     string inGame = "InGame";
 
+    void Start() => GameManager.Instance.BGMPlay();
     public void OnClickStart() => SceneManager.LoadScene(inGame);
     // 시작 버튼 =>  InGame Scene으로 이동
     public void OnClickExit() { Application.Quit(); }

@@ -9,6 +9,9 @@ public class SettingManager : MonoBehaviour
     [SerializeField] Sprite[] sprites;
     [SerializeField] Image[] buttonImages;
 
+    int volumeIndex = 0;
+    int vibeIndex = 1;
+
     void Start()
     {
         for (int i = 0; i < buttonImages.Length; ++i)
@@ -24,5 +27,9 @@ public class SettingManager : MonoBehaviour
         PlayerPrefs.SetInt(settingString + _index.ToString(), Convert.ToInt32(!check));
         buttonImages[_index].sprite = sprites[PlayerPrefs.GetInt(settingString + _index.ToString())];
         // on, off 설정을 변경하고 그에 맞는 스프라이트로 변경
+        if (_index == volumeIndex)
+            GameManager.Instance.setVolume(!check);
+        else if(_index == vibeIndex)
+            GameManager.Instance.setVibe(!check);
     }
 }
