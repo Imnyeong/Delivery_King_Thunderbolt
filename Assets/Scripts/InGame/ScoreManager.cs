@@ -6,7 +6,7 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
 
-    string scoreString = "Score : ";
+    string scoreString = "배달거리 : ";
     string rankString = "rankString";
     string rankInt = "rankInt";
 
@@ -39,7 +39,7 @@ public class ScoreManager : MonoBehaviour
             if (PlayManager.Instance.playType == PlayManager.PlayType.Play)
             {
                 ++scoreValue;
-                scoreText.text = scoreString + string.Format("{0:#,###}", scoreValue);
+                scoreText.text = scoreString + string.Format("{0:#,###}m", scoreValue);
             }
             // 일정 시간 마다 점수 획득
         }

@@ -32,7 +32,7 @@ public class PlayManager : MonoBehaviour
 
     [SerializeField] GameObject gameoverUI;
     string intro = "Intro";
-    string scoreString = " 점 달성!";
+    string scoreString = "운행거리 ";
     [SerializeField] Text scoreText;
     [SerializeField] InputField nameInput;
     [SerializeField] Text warningText;
@@ -101,7 +101,7 @@ public class PlayManager : MonoBehaviour
             nameInput.text = PlayerPrefs.GetString(lastName);
 
         gameoverUI.SetActive(true);
-        scoreText.text = string.Format("{0:#,###}", ScoreManager.Instance.scoreValue + scoreString);
+        scoreText.text = scoreString + string.Format("{0:#,###}m", ScoreManager.Instance.scoreValue);
         // GameOver UI 띄워주고 점수 보여준다
     }
     public void GameRePlay()

@@ -228,9 +228,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Score : 0
-
-'
+  m_Text: "\uBC30\uB2EC\uAC70\uB9AC : 0m"
 --- !u!114 &165122204871016797
 MonoBehaviour:
   m_ObjectHideFlags: 0
