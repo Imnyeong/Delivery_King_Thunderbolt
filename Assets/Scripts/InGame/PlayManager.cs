@@ -28,6 +28,7 @@ public class PlayManager : MonoBehaviour
 
     [SerializeField] Button pauseButton;
     [SerializeField] Sprite[] pauseImages;
+    [SerializeField] Rigidbody2D playerRigid;
 
     [SerializeField] GameObject gameoverUI;
     string intro = "Intro";
@@ -37,7 +38,7 @@ public class PlayManager : MonoBehaviour
     [SerializeField] Text warningText;
     string lastName = "lastName";
 
-    [SerializeField] Rigidbody2D playerRigid;
+    int buttonSound = 0;
     private void Start()
     {
         if (Instance == null)
@@ -74,6 +75,7 @@ public class PlayManager : MonoBehaviour
     }
     public void OnClickPause()
     {
+        GameManager.Instance.EffectPlay(buttonSound);
         if (playType == PlayType.Play)
         {
             playType = PlayType.Pause;
@@ -104,6 +106,8 @@ public class PlayManager : MonoBehaviour
     }
     public void GameRePlay()
     {
+        GameManager.Instance.EffectPlay(buttonSound);
+
         if (nameInput.text.Contains(" "))
         {
             warningText.text = warningBlank;
@@ -127,6 +131,8 @@ public class PlayManager : MonoBehaviour
     }
     public void GoIntro()
     {
+        GameManager.Instance.EffectPlay(buttonSound);
+
         if (nameInput.text.Contains(" "))
         {
             warningText.text = warningBlank;

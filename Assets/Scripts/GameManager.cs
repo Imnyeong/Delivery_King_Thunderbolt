@@ -25,8 +25,10 @@ public class GameManager : MonoBehaviour
     bool volumeBool;
     bool vibeBool;
 
-    [SerializeField] AudioSource audioSource;
-    [SerializeField] AudioClip[] audioClips;
+    [SerializeField] AudioSource bgmSource;
+    [SerializeField] AudioSource effectSource;
+    [SerializeField] AudioClip[] bgmClips;
+    [SerializeField] AudioClip[] effectClips;
 
     void Start()
     {
@@ -46,28 +48,38 @@ public class GameManager : MonoBehaviour
 
         SceneManager.LoadScene(intro);
     }
+    #region BGM
     public void BGMPlay()
     {
-        if (audioSource.clip != null)
+        if (bgmSource.clip != null)
         {
-            audioSource.Stop();
-            audioSource.clip = null;
+            bgmSource.Stop();
+            bgmSource.clip = null;
         }
         if (!volumeBool)
             return;
         if (SceneManager.GetActiveScene().name == intro)
-            audioSource.clip = audioClips[0];
+            bgmSource.clip = bgmClips[0];
         else if (SceneManager.GetActiveScene().name == inGame)
-            audioSource.clip = audioClips[random.Next(1, 6)];
+            bgmSource.clip = bgmClips[random.Next(1, 6)];
 
-        audioSource.Play();
+        bgmSource.Play();
     }
-    public void BGMPause() => audioSource.Pause();
-    public void BGMResume() => audioSource.Play();
+    public void BGMPause() => bgmSource.Pause();
+    public void BGMResume() => bgmSource.Play();
     public void BGMStop()
     {
-        audioSource.Stop();
-        audioSource.clip = null;
+        bgmSource.Stop();
+        bgmSource.clip = null;
+    }
+    #endregion
+    public void EffectPlay(int _index)
+    {
+        if (!volumeBool)
+            return;
+
+        effectSource.clip = effectClips[_index];
+        effectSource.Play();
     }
     public void setVolume(bool _isOn)
     {

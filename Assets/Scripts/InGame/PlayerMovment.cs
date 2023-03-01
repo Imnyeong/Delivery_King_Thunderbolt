@@ -25,6 +25,10 @@ public class PlayerMovment : MonoBehaviour
     float accelerometer;
     float accelValue = 10.0f;
     string animationType = "MoveType";
+
+    int deathSound = 1;
+    int oilSound = 2;
+
     void Start()
     {
         if (oilCoroutine != null)
@@ -46,6 +50,7 @@ public class PlayerMovment : MonoBehaviour
         if (other.tag == "Oil")
         // 기름 먹은 경우
         {
+            GameManager.Instance.EffectPlay(oilSound);           
             if (currentOil + oilValue > fullOil)
                 currentOil = fullOil;
             else
@@ -57,6 +62,7 @@ public class PlayerMovment : MonoBehaviour
         if (other.tag == "Car")
         // 차에 부딪힌 경우
         {
+            GameManager.Instance.EffectPlay(deathSound);
             currentOil = carValue;
             StopCoroutine(oilCoroutine);
             PlayManager.Instance.playType = PlayManager.PlayType.End;
