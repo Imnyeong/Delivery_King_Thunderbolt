@@ -69,7 +69,6 @@ public class GameManager : MonoBehaviour
         audioSource.Stop();
         audioSource.clip = null;
     }
-
     public void setVolume(bool _isOn)
     {
         volumeBool = _isOn;
@@ -80,4 +79,8 @@ public class GameManager : MonoBehaviour
             BGMPlay();
     }
     public void setVibe(bool _isOn) => vibeBool = _isOn;
+    public bool getVibe()
+    {
+        return vibeBool;
+    }
 }

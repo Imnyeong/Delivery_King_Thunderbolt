@@ -37,6 +37,7 @@ public class PlayManager : MonoBehaviour
     [SerializeField] Text warningText;
     string lastName = "lastName";
 
+    [SerializeField] Rigidbody2D playerRigid;
     private void Start()
     {
         if (Instance == null)
@@ -76,11 +77,13 @@ public class PlayManager : MonoBehaviour
         if (playType == PlayType.Play)
         {
             playType = PlayType.Pause;
+            playerRigid.constraints = RigidbodyConstraints2D.FreezeAll;
             GameManager.Instance.BGMPause();
         }
         else if (playType == PlayType.Pause)
         {
             playType = PlayType.Play;
+            playerRigid.constraints = RigidbodyConstraints2D.FreezePositionY;
             GameManager.Instance.BGMResume();
         }
         // 정지 상태 변경
@@ -89,6 +92,9 @@ public class PlayManager : MonoBehaviour
     }
     public void GameOver()
     {
+        if(GameManager.Instance.getVibe())
+            Handheld.Vibrate();
+
         if (PlayerPrefs.HasKey(lastName))
             nameInput.text = PlayerPrefs.GetString(lastName);
 

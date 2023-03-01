@@ -20,7 +20,6 @@ public class SettingManager : MonoBehaviour
         }
         // 단말기에 저장된 설정대로 스프라이트 설정
     }
-
     public void OnClickButton(int _index)
     {
         bool check = Convert.ToBoolean(PlayerPrefs.GetInt(settingString + _index.ToString()));

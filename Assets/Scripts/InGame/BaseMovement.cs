@@ -24,7 +24,6 @@ public class BaseMovement : MonoBehaviour
             objectRect.anchoredPosition = new Vector2(objectRect.anchoredPosition.x, objectRect.anchoredPosition.y - PlayManager.Instance.speedValue);
             // 끝 지점에 도착할 때 까지 아래로 이동
     }
-
     public Vector2 GetStartPosition()
     {
         return startPosition;

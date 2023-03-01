@@ -440,6 +440,11 @@ PrefabInstance:
       objectReference: {fileID: 701044490}
     - target: {fileID: 3233285141896321497, guid: 2c59f53dd861b3c419f3338ee250449f,
         type: 3}
+      propertyPath: playerRigid
+      value: 
+      objectReference: {fileID: 6243993642991533996}
+    - target: {fileID: 3233285141896321497, guid: 2c59f53dd861b3c419f3338ee250449f,
+        type: 3}
       propertyPath: warningText
       value: 
       objectReference: {fileID: 6355619074516901878}
@@ -1012,6 +1017,12 @@ PrefabInstance:
       objectReference: {fileID: 1885619614}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 149904cfd25ace246a8795cb98d842d0, type: 3}
+--- !u!50 &6243993642991533996 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 6793010256428719256, guid: 149904cfd25ace246a8795cb98d842d0,
+    type: 3}
+  m_PrefabInstance: {fileID: 6243993642991533995}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6355619074516901874
 PrefabInstance:
   m_ObjectHideFlags: 0

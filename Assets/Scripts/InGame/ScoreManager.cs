@@ -16,7 +16,6 @@ public class ScoreManager : MonoBehaviour
     [HideInInspector] public int scoreValue = 0;
     int rankCount = 10;
 
-
     void Start()
     {
         if (Instance == null)
@@ -31,7 +30,6 @@ public class ScoreManager : MonoBehaviour
         scoreCoroutine = ScoreCoroutine();
         StartCoroutine(scoreCoroutine);
     }
-
     IEnumerator ScoreCoroutine()
     {
         while (true)
@@ -46,7 +44,6 @@ public class ScoreManager : MonoBehaviour
             // 일정 시간 마다 점수 획득
         }
     }
-
     public void SaveScore(string _name)
     {
         for (int i = 0; i < rankCount; i++)
