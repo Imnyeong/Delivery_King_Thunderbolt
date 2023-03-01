@@ -47,6 +47,8 @@ public class PlayerMovment : MonoBehaviour
     // FixedUpdate 문에서 입력 체크
     void OnTriggerEnter2D(Collider2D other)
     {
+        ObjectSpawn.Instance.ObjectReturn(other.gameObject);
+        // 오브젝트 제거
         if (other.tag == "Oil")
         // 기름 먹은 경우
         {
@@ -56,8 +58,7 @@ public class PlayerMovment : MonoBehaviour
             else
                 currentOil += oilValue;
             // 최대치를 초과하면 최대치, 그게 아니라면 일정 값 회복
-            ObjectSpawn.Instance.ObjectReturn(other.gameObject);
-            // 오브젝트 제거
+
         }
         if (other.tag == "Car")
         // 차에 부딪힌 경우

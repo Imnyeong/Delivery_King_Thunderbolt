@@ -20,14 +20,18 @@ public class GameManager : MonoBehaviour
     int vibeInt = 1;
 
     int onValue = 1;
-    int offValue = 0;
 
     bool volumeBool;
     bool vibeBool;
 
     [SerializeField] AudioSource bgmSource;
-    [SerializeField] AudioSource effectSource;
     [SerializeField] AudioClip[] bgmClips;
+
+    int bgmIntro = 0;
+    int bgmIndex = 1;
+    int bgmMax = 5;
+
+    [SerializeField] AudioSource effectSource;
     [SerializeField] AudioClip[] effectClips;
 
     void Start()
@@ -59,9 +63,9 @@ public class GameManager : MonoBehaviour
         if (!volumeBool)
             return;
         if (SceneManager.GetActiveScene().name == intro)
-            bgmSource.clip = bgmClips[0];
+            bgmSource.clip = bgmClips[bgmIntro];
         else if (SceneManager.GetActiveScene().name == inGame)
-            bgmSource.clip = bgmClips[random.Next(1, 6)];
+            bgmSource.clip = bgmClips[random.Next(bgmIndex, bgmMax)];
 
         bgmSource.Play();
     }
