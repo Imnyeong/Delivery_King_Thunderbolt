@@ -17,6 +17,8 @@ public class PlayManager : MonoBehaviour
 
     public PlayType playType = PlayType.Play;
 
+    string warningBlank = "공백이 포함되어 있습니다";
+    string warningEmpty = "이름을 입력하세요";
     public enum PlayType
     {
         Play,
@@ -33,6 +35,7 @@ public class PlayManager : MonoBehaviour
     [SerializeField] Text scoreText;
     [SerializeField] InputField nameInput;
     [SerializeField] Text warningText;
+    string lastName = "lastName";
 
     private void Start()
     {
@@ -68,10 +71,8 @@ public class PlayManager : MonoBehaviour
             StopCoroutine(accelCoroutine);
         // 최대 속도에 도달하면 Coroutine 종료
     }
-
     public void OnClickPause()
     {
-        //PlayerPrefs.DeleteAll();
         if (playType == PlayType.Play)
         {
             playType = PlayType.Pause;
@@ -85,10 +86,12 @@ public class PlayManager : MonoBehaviour
         // 정지 상태 변경
         pauseButton.image.sprite = pauseImages[Convert.ToInt32(playType == PlayType.Play)];
         // 정지 버튼 아이콘 변경
-        
     }
     public void GameOver()
     {
+        if (PlayerPrefs.HasKey(lastName))
+            nameInput.text = PlayerPrefs.GetString(lastName);
+
         gameoverUI.SetActive(true);
         scoreText.text = string.Format("{0:#,###}", ScoreManager.Instance.scoreValue + scoreString);
         // GameOver UI 띄워주고 점수 보여준다
@@ -97,11 +100,21 @@ public class PlayManager : MonoBehaviour
     {
         if (nameInput.text.Contains(" "))
         {
+            warningText.text = warningBlank;
+            warningText.gameObject.SetActive(true);
+            return;
+        }
+        else if (nameInput.text.Equals(string.Empty))
+        {
+            warningText.text = warningEmpty;
             warningText.gameObject.SetActive(true);
             return;
         }
         else
-            ScoreManager.Instance.saveScore(nameInput.text);
+        {
+            ScoreManager.Instance.SaveScore(nameInput.text);
+            PlayerPrefs.SetString(lastName, nameInput.text);
+        }
         // 이름 입력 받아서 점수 저장
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         // InGame Scene 재시작
@@ -110,11 +123,21 @@ public class PlayManager : MonoBehaviour
     {
         if (nameInput.text.Contains(" "))
         {
+            warningText.text = warningBlank;
+            warningText.gameObject.SetActive(true);
+            return;
+        }
+        else if (nameInput.text.Equals(string.Empty))
+        {
+            warningText.text = warningEmpty;
             warningText.gameObject.SetActive(true);
             return;
         }
         else
-            ScoreManager.Instance.saveScore(nameInput.text);
+        {
+            ScoreManager.Instance.SaveScore(nameInput.text);
+            PlayerPrefs.SetString(lastName, nameInput.text);
+        }
         // 이름 입력 받아서 점수 저장
         SceneManager.LoadScene(intro);
         // Intro Scene으로 이동

@@ -9,7 +9,6 @@ public class ScoreManager : MonoBehaviour
     string scoreString = "Score : ";
     string rankString = "rankString";
     string rankInt = "rankInt";
-    string emptyString = "-";
 
     private IEnumerator scoreCoroutine;
 
@@ -48,11 +47,8 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    public void saveScore(string _name)
+    public void SaveScore(string _name)
     {
-        if (_name.Equals(string.Empty))
-            _name = emptyString;
-
         for (int i = 0; i < rankCount; i++)
         {
             if (scoreValue > PlayerPrefs.GetInt(rankInt + i.ToString()))
