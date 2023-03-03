@@ -25,8 +25,8 @@ public class ObjectSpawn : MonoBehaviour
     private int minValue = 1;
     private int maxValue = 10;
 
-    private int minTime = 1;
-    private int maxTime = 3;
+    [SerializeField] int minTime = 1;
+    [SerializeField] int maxTime = 2;
 
     void Start()
     {

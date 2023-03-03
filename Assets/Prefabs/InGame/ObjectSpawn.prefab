@@ -43,8 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ddedace634b65949bb1c6c50a477ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
   carPrefab: {fileID: 2625026436444230488, guid: 90844e79ce3fabf4c909226c16bcb714,
     type: 3}
   oilPrefab: {fileID: 2625026436444230488, guid: 41a9ec82b629b03428f2913c5b3a175e,
     type: 3}
+  minTime: 1
+  maxTime: 2
