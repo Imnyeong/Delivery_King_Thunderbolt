@@ -6,3 +6,6 @@ https://play.google.com/store/apps/details?id=com.Imnyeong.DKT
 
 2023.03.07
 Beta Ver 출시
+
+2023.03.08
+0.01 Ver 업데이트
