@@ -8,7 +8,7 @@ public class BaseMovement : MonoBehaviour
 
     public RectTransform objectRect;
 
-    void Update()
+    void FixedUpdate()
     {
         if (PlayManager.Instance.playType != PlayManager.PlayType.Play)
             return;

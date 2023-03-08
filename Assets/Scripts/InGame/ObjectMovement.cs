@@ -17,7 +17,7 @@ public class ObjectMovement : BaseMovement
         this.gameObject.SetActive(true);
     }
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (PlayManager.Instance.playType != PlayManager.PlayType.Play)
             return;
