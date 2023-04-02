@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Firebase;
+using Firebase.Database;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -91,6 +93,17 @@ public class PlayManager : MonoBehaviour
         // 정지 상태 변경
         pauseButton.image.sprite = pauseImages[Convert.ToInt32(playType == PlayType.Play)];
         // 정지 버튼 아이콘 변경
+
+        AppOptions options = new AppOptions { DatabaseUrl = new Uri("https://deliverykingthunderbolt-default-rtdb.asia-southeast1.firebasedatabase.app/") };
+        FirebaseApp app = FirebaseApp.Create(options);
+        DatabaseReference reference = FirebaseDatabase.DefaultInstance.GetReference("rank");
+
+        RankInfo rankInfo = new RankInfo();
+        rankInfo.name = "user_" + ScoreManager.Instance.scoreValue.ToString();
+        rankInfo.score = ScoreManager.Instance.scoreValue;
+
+        string jsonString = JsonUtility.ToJson(rankInfo);
+        reference.Child(ScoreManager.Instance.scoreValue.ToString()).SetRawJsonValueAsync(jsonString);
     }
     public void GameOver()
     {
@@ -154,4 +167,9 @@ public class PlayManager : MonoBehaviour
         SceneManager.LoadScene(intro);
         // Intro Scene으로 이동
     }
+}
+public class RankInfo
+{
+    public string name;
+    public int score;
 }
