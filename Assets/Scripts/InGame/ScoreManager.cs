@@ -1,5 +1,11 @@
-﻿using System.Collections;
+﻿using Firebase.Database;
+using Firebase.Extensions;
+using Newtonsoft.Json;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
@@ -7,14 +13,15 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager Instance;
 
     string scoreString = "배달거리 : ";
-    string rankString = "rankString";
-    string rankInt = "rankInt";
 
     private IEnumerator scoreCoroutine;
 
-    [SerializeField] Text scoreText;
-    [HideInInspector] public int scoreValue = 0;
-    int rankCount = 10;
+    [SerializeField]
+    Text scoreText;
+    [HideInInspector] 
+    public int scoreValue = 0;
+    private List<RankInfo> rankList;
+    private int rankCount = 10;
 
     void Start()
     {
@@ -46,21 +53,59 @@ public class ScoreManager : MonoBehaviour
     }
     public void SaveScore(string _name)
     {
-        for (int i = 0; i < rankCount; i++)
+        rankList = new List<RankInfo>(rankCount);
+
+        //for (int i = 0; i < rankCount; i++)
+        //{
+        //    RankInfo tmp = new RankInfo();
+        //    tmp.name = " ";
+        //    tmp.score = 0;
+        //    rankList.Add(tmp);
+        //}
+        //string jsonString = JsonConvert.SerializeObject(rankList);
+        //GameManager.Instance.reference.SetRawJsonValueAsync(jsonString);
+        //초기화
+
+        GameManager.Instance.reference.GetValueAsync().ContinueWithOnMainThread(task =>
         {
-            if (scoreValue > PlayerPrefs.GetInt(rankInt + i.ToString()))
+            if (task.IsCompleted)
             {
-                for (int j = 9; j > i; j--)
+                DataSnapshot result = task.Result;
+        
+                foreach (DataSnapshot data in result.Children)
                 {
-                    PlayerPrefs.SetString(rankString + j.ToString(), PlayerPrefs.GetString(rankString + (j - 1).ToString()));
-                    PlayerPrefs.SetInt(rankInt + j.ToString(), PlayerPrefs.GetInt(rankInt + (j - 1).ToString()));
+                    IDictionary eachInfo = (IDictionary)data.Value;
+                    RankInfo rankInfo = new RankInfo();
+                    rankInfo.name = eachInfo["name"].ToString();
+                    rankInfo.score = Convert.ToInt32(eachInfo["score"]);
+                    rankList.Add(rankInfo);
+                    Debug.Log(eachInfo["name"] + ", " + eachInfo["score"]);
                 }
-                PlayerPrefs.SetString(rankString + i.ToString(), _name);
-                PlayerPrefs.SetInt(rankInt + i.ToString(), scoreValue);
-                break;
+                RankInfo currentInfo = new RankInfo();
+                currentInfo.name = _name;
+                currentInfo.score = scoreValue;
+        
+                for (int i = 0; i < rankCount; i++)
+                {
+                    if (currentInfo.score > rankList[i].score)
+                    {
+                        for (int j = 9; j > i; j--)
+                        {
+                            rankList[j] = rankList[j - 1];
+                        }
+                        rankList[i] = currentInfo;
+                        break;
+                    }
+                }
+                string jsonString = JsonConvert.SerializeObject(rankList);
+                GameManager.Instance.reference.SetRawJsonValueAsync(jsonString);
             }
-        }
-        // 랭킹 교체 알고리즘, 새로 들어온 점수보다 낮으면 위치를 바꾼다
-        // 입력 받은 이름과 점수 저장
+            else
+            {
+                Debug.Log("error");
+            }
+        });
+        //랭킹 교체 알고리즘, 새로 들어온 점수보다 낮으면 위치를 바꾼다
+        //입력 받은 이름과 점수 저장
     }
 }

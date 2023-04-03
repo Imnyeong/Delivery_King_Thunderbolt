@@ -25,18 +25,18 @@ public class PlayManager : MonoBehaviour
         Pause,
         End
     }
-
     [SerializeField] Button pauseButton;
     [SerializeField] Sprite[] pauseImages;
     [SerializeField] Rigidbody2D playerRigid;
 
     [SerializeField] GameObject gameoverUI;
-    string intro = "Intro";
+
     string scoreString = "운행거리 ";
     [SerializeField] Text scoreText;
     [SerializeField] InputField nameInput;
     [SerializeField] Text warningText;
     string lastName = "lastName";
+    string intro = "Intro";
 
     int buttonSound = 0;
     private void Start()
@@ -122,8 +122,8 @@ public class PlayManager : MonoBehaviour
         }
         else
         {
-            ScoreManager.Instance.SaveScore(nameInput.text);
             PlayerPrefs.SetString(lastName, nameInput.text);
+            ScoreManager.Instance.SaveScore(nameInput.text);
         }
         // 이름 입력 받아서 점수 저장
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -147,8 +147,8 @@ public class PlayManager : MonoBehaviour
         }
         else
         {
-            ScoreManager.Instance.SaveScore(nameInput.text);
             PlayerPrefs.SetString(lastName, nameInput.text);
+            ScoreManager.Instance.SaveScore(nameInput.text);
         }
         // 이름 입력 받아서 점수 저장
         SceneManager.LoadScene(intro);
