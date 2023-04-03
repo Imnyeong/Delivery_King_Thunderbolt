@@ -32,7 +32,7 @@ public class RankingManager : MonoBehaviour
                     rankInfo.name = eachInfo["name"].ToString();
                     rankInfo.score = Convert.ToInt32(eachInfo["score"]);
                     rankList.Add(rankInfo);
-                    Debug.Log(eachInfo["name"] + ", " + eachInfo["score"]);
+                    //Debug.Log(eachInfo["name"] + ", " + eachInfo["score"]);
                 }
                 SetInformation(rankList);
             }

@@ -17,8 +17,10 @@ public class PlayManager : MonoBehaviour
 
     public PlayType playType = PlayType.Play;
 
-    string warningBlank = "공백이 포함되어 있습니다";
-    string warningEmpty = "이름을 입력하세요";
+    private string warningBlank = "공백이 포함되어 있습니다";
+    private string warningFilter = "부적절한 이름입니다";
+
+    private string warningEmpty = "이름을 입력하세요";
     public enum PlayType
     {
         Play,
@@ -31,12 +33,14 @@ public class PlayManager : MonoBehaviour
 
     [SerializeField] GameObject gameoverUI;
 
-    string scoreString = "운행거리 ";
+    private string scoreString = "운행거리 ";
     [SerializeField] Text scoreText;
     [SerializeField] InputField nameInput;
     [SerializeField] Text warningText;
-    string lastName = "lastName";
-    string intro = "Intro";
+    private string lastName = "lastName";
+    private string intro = "Intro";
+    private bool isFilter = false;
+    string[] filter;
 
     int buttonSound = 0;
     private void Start()
@@ -56,6 +60,9 @@ public class PlayManager : MonoBehaviour
         pauseButton.onClick.AddListener(OnClickPause);
         // 정지 버튼 리스터 초기화
         GameManager.Instance.BGMPlay();
+
+        string path = Application.dataPath + "/Plugins/Filter/fword_list.txt";
+        filter = System.IO.File.ReadAllLines(path);
     }
     IEnumerator AccelCoroutine()
     {
@@ -122,8 +129,17 @@ public class PlayManager : MonoBehaviour
         }
         else
         {
-            PlayerPrefs.SetString(lastName, nameInput.text);
-            ScoreManager.Instance.SaveScore(nameInput.text);
+            if (Filtering(nameInput.text))
+            {
+                warningText.text = warningFilter;
+                warningText.gameObject.SetActive(true);
+                return;
+            }
+            else
+            {
+                PlayerPrefs.SetString(lastName, nameInput.text);
+                ScoreManager.Instance.SaveScore(nameInput.text);
+            }
         }
         // 이름 입력 받아서 점수 저장
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -147,11 +163,37 @@ public class PlayManager : MonoBehaviour
         }
         else
         {
-            PlayerPrefs.SetString(lastName, nameInput.text);
-            ScoreManager.Instance.SaveScore(nameInput.text);
+            if (Filtering(nameInput.text))
+            {
+                warningText.text = warningFilter;
+                warningText.gameObject.SetActive(true);
+                return;
+            }
+            else
+            {
+                PlayerPrefs.SetString(lastName, nameInput.text);
+                ScoreManager.Instance.SaveScore(nameInput.text);
+            }
         }
         // 이름 입력 받아서 점수 저장
         SceneManager.LoadScene(intro);
         // Intro Scene으로 이동
+    }
+    private bool Filtering(string _text)
+    {
+        isFilter = false;
+
+        if (filter.Length > 0)
+        {
+            for (int i = 0; i < filter.Length; i++)
+            {
+                if (_text.Contains(filter[i]))
+                {
+                    isFilter = true;
+                    break;
+                }
+            }
+        }
+        return isFilter;
     }
 }
