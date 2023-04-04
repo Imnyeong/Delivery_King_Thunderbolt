@@ -78,7 +78,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Beta Ver
+  m_Text: 0.03 Ver
 --- !u!114 &1910873187014202360
 MonoBehaviour:
   m_ObjectHideFlags: 0
