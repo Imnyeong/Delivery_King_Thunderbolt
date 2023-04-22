@@ -1,6 +1,4 @@
-﻿using Firebase;
-using Firebase.Database;
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -36,10 +34,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] AudioSource effectSource;
     [SerializeField] AudioClip[] effectClips;
 
-    AppOptions options = new AppOptions { DatabaseUrl = new Uri("") };
-    [HideInInspector]
-    public DatabaseReference reference;
-
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -55,10 +49,6 @@ public class GameManager : MonoBehaviour
 
         volumeBool = Convert.ToBoolean(PlayerPrefs.GetInt(settingString + volumeInt.ToString()));
         vibeBool = Convert.ToBoolean(PlayerPrefs.GetInt(settingString + vibeInt.ToString()));
-
-        FirebaseApp app = FirebaseApp.Create(options);
-        reference = FirebaseDatabase.DefaultInstance.GetReference("Rank");
-        //reference = FirebaseDatabase.DefaultInstance.RootReference;
 
         SceneManager.LoadScene(intro);
     }
