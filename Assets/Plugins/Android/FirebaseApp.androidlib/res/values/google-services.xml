@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/firebase_database_url,@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_web_client_id">
+  <string name="firebase_database_url" translatable="false">https://deliverykingthunderbolt-default-rtdb.asia-southeast1.firebasedatabase.app/</string>
+  <string name="gcm_defaultSenderId" translatable="false">690230972949</string>
+  <string name="google_storage_bucket" translatable="false">deliverykingthunderbolt.appspot.com</string>
+  <string name="project_id" translatable="false">deliverykingthunderbolt</string>
+  <string name="google_api_key" translatable="false">AIzaSyDNlFFXAhQ_mfHgNHH5X9uFiW7arrT_274</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDNlFFXAhQ_mfHgNHH5X9uFiW7arrT_274</string>
+  <string name="google_app_id" translatable="false">1:690230972949:android:97fd096a858e6f6ef9341c</string>
+  <string name="default_web_client_id" translatable="false">690230972949-3ntorq38nc65tl9hn4s1jfoib1ttksi3.apps.googleusercontent.com</string>
+</resources>
