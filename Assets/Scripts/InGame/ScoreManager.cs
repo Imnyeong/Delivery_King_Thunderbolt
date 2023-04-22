@@ -79,7 +79,7 @@ public class ScoreManager : MonoBehaviour
                     rankInfo.name = eachInfo["name"].ToString();
                     rankInfo.score = Convert.ToInt32(eachInfo["score"]);
                     rankList.Add(rankInfo);
-                    //Debug.Log(eachInfo["name"] + ", " + eachInfo["score"]);
+                    Debug.Log(eachInfo["name"] + ", " + eachInfo["score"]);
                 }
                 RankInfo currentInfo = new RankInfo();
                 currentInfo.name = _name;
