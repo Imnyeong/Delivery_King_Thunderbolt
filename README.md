@@ -16,7 +16,7 @@
 - 시간이 지남에 따라 점점 빠르게 내려오는 장애물 Object로 난이도 조절
 - Firebase를 활용하여 DB에 랭킹 정보 저장, 불러오기
 
-## Script로 보는 핵심 기능
+## Script로 보는 핵심 기능 📰
 
 ### 기울기 센서 값을 받아와서 플레이어를 좌, 우로 이동
 ```ruby
@@ -39,6 +39,6 @@ new Vector2(xPositionArray[random.Next(minValue, maxValue)], GetStartPosition().
 
 내려오는 장애물을 새로 만들지 않고 시작지점의 Y 좌표와 랜덤한 X 좌표를 부여하여 Object 재활용
 
-## Sample Image
+## Sample Image 🎮
 <img src="https://github.com/user-attachments/assets/b0f04904-bc4b-4147-a706-d15fa8110560" width="270" height="480"/>  
 <img src="https://github.com/user-attachments/assets/d4eaf867-003d-41bd-9e76-db81384a3116" width="270" height="480"/>
